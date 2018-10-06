@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head th:replace="~{fragments/header :: header}"></head>
+<body>
+
+<div class="container blog-content-container">
+    <span>用户信息</span><br>
+    id: <span th:text="${userModel.user.id}"></span><br>
+    userName: <span th:text="${userModel.user.userName}"></span><br>
+    email: <span th:text="${userModel.user.email}"></span>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

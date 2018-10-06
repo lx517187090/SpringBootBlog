@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head th:replace="~{fragments/header :: header}"></head>
+<body>
+    <div class="container blog-content-container"><!--container 样试-->
+        <a class="btn default" href="/users/form.html" th:href="@{/users/form }">创建用户</a>
+        <div>
+            <h2 th:text="${userModel.title }">页面</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>email</td>
+                        <td>userName</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${userModel.userList.size() eq 0 }">
+                        <td colspan="3">no user info</td>
+                    </tr>
+                    <tr th:each="user : ${userModel.userList }">
+                        <td th:text="${user.id }"></td>
+                        <td th:text="${user.email }"></td>
+                        <td><a th:href="@{'/users/getUserById/' + ${user.id}}" th:text="${user.userName }"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
