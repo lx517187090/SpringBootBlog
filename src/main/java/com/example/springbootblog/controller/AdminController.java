@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Blog控制器
+ * 用户admin控制器
  */
 @RestController
 @RequestMapping("/admins")
