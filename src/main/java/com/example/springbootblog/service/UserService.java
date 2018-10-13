@@ -1,38 +1,24 @@
 package com.example.springbootblog.service;
 
-import com.example.springbootblog.dao.UserDao;
 import com.example.springbootblog.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-@Service("userService")
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserDao userDao;
+    public User saveOrUpdate(User user);
 
-    public List<User> findAll() {
-        return (List<User>)userDao.findAll();
-    }
+    public User registerUser(User user);
 
-    public User findUserById(Long id) {
-        return userDao.findById(id).get();
-    }
+    public void removeUser(Long id);
 
-    public User findUserByUserName(String userName) {
-        return null;
-    }
+    public List<User> findAll();
 
-    public User saveOrUpdate(User user) {
-        return userDao.save(user);
-    }
+    public User findUserById(Long id);
 
-
-    public void deleteById(Long id) {
-        userDao.deleteById(id);
-    }
+    public Page<User> listUserByNameLike(String name, Pageable pageable);
 
 
 }

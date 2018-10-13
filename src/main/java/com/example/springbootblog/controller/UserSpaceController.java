@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 主页控制器
+ * 用户主页控制器
  */
 @Controller
 @RequestMapping("/u")
@@ -27,25 +27,27 @@ public class UserSpaceController {
             ,@RequestParam(value = "keyword",required = false) String keyword){
         if(null != category){
             System.out.println("category");
+            System.out.println("selflink " + "redirect:/u/"+ username + "/blogs?category=" + category);
+            return  "/userspace/u";
+        }else if(keyword != null && keyword.isEmpty() == false){
+            System.out.println("keyword :" + keyword);
+            System.out.println("selflink " + "redirect:/u/"+ username + "/blogs?keywprd=" + keyword);
+            return  "/userspace/u";
         }
-        return "index";
+        System.out.println("order :" + order);
+        System.out.println("selflink " + "redirect:/u/"+ username + "/blogs?order=" + order);
+        return  "/userspace/u";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "login";
+    @GetMapping("/{username}/blogs/{id}")
+    public String listBlogsByOrder(@PathVariable("id")Long id){
+        System.out.println("blogs : " + id);
+        return "/userspace/blog";
     }
 
 
-    @GetMapping("/login-error")
-    public String LoginError(Model model){
-        model.addAttribute("loginError", true);
-        model.addAttribute("errorMsg", "登陆失败，用户名或密码错误");
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String register(){
-        return "register";
+    @GetMapping("/{username}/blogs/edit")
+    public String editBlog(){
+        return "/userspace/blogedit";
     }
 }
