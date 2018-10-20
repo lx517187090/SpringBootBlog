@@ -8,12 +8,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,17 +44,20 @@ public class User implements UserDetails {
     @Column(length = 200)
     private String avater;
 
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id",referencedColumnName =""))
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id",referencedColumnName ="id"),
+        inverseJoinColumns = @JoinColumn(name = "authority_id",referencedColumnName = "id"))
     private List<Authoirty> authorities;
     //设为不参构造函数，防止直接使用
     protected User(){}
 
-    public User(Long id, String name, String username, String email) {
-        this.id = id;
-        this.name = name ;
+    public User(String name,  String username,  String password, String email, String avater, List<Authoirty> authorities) {
+        this.name = name;
         this.username = username;
+        this.password = password;
         this.email = email;
+        this.avater = avater;
+        this.authorities = authorities;
     }
 
     public Long getId() {

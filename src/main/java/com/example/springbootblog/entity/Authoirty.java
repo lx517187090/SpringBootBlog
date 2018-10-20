@@ -18,6 +18,12 @@ public class Authoirty implements GrantedAuthority {
         return this.name;
     }
 
+    //设为不参构造函数，防止直接使用
+    protected Authoirty(){}
+    public Authoirty(String name){
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
