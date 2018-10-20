@@ -13,8 +13,6 @@
 要生成目录，按如下方式初始化：
 $.catalog("#catalog", ".abc");
 
- * @since: 1.0.0 2017-03-26
- * @author Way Lau <https://waylau.com>
  */
 (function($) {
 	

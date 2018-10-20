@@ -2,7 +2,6 @@
  * Avatar JS.
  * 
  * @since: 1.0.0 2017/4/6
- * @author Way Lau <https://waylau.com>
  */
 "use strict";
 //# sourceURL=main.js
@@ -13,7 +12,7 @@ $(function() {
 	
 	// 获取编辑用户头像的界面
 	$(".blog-content-container").on("click",".blog-edit-avatar", function () { 
-		avatarApi = "/u/"+$(this).attr("userName")+"/avatar";
+		avatarApi = "/u/"+$(this).attr("username")+"/avatar";
 		$.ajax({ 
 			 url: avatarApi, 
 			 success: function(data){

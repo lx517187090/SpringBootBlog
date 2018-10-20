@@ -16,7 +16,7 @@ public class UserSpaceController {
 
     @GetMapping("/{username}")
     public String userspace(@PathVariable("username")String username){
-        System.out.println("userName : " + username);
+        System.out.println("username : " + username);
         return "userspace/u";
     }
 
