@@ -1,6 +1,7 @@
 package com.example.springbootblog.util;
 
-import org.apache.commons.lang3.StringUtils;
+
+import org.thymeleaf.util.StringUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
