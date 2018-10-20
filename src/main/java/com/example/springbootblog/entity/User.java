@@ -1,13 +1,16 @@
 package com.example.springbootblog.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -40,6 +43,9 @@ public class User implements UserDetails {
     @Column(length = 200)
     private String avater;
 
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id",referencedColumnName =""))
+    private List<Authoirty> authorities;
     //设为不参构造函数，防止直接使用
     protected User(){}
 
@@ -62,25 +68,7 @@ public class User implements UserDetails {
         return username;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -104,7 +92,15 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<SimpleGrantedAuthority> simpleGrantedAuthority = new ArrayList<>();
+        for (GrantedAuthority authority : this.authorities){
+            simpleGrantedAuthority.add(new SimpleGrantedAuthority(authority.getAuthority()));
+        }
+        return simpleGrantedAuthority;
+    }
+
+    public void setAuthorities(List<Authoirty> authorities) {
+        this.authorities = authorities;
     }
 
     public String getPassword() {
@@ -121,6 +117,28 @@ public class User implements UserDetails {
 
     public void setAvater(String avater) {
         this.avater = avater;
+    }
+
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override

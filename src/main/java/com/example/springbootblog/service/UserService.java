@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface UserService {
 
-    public User saveOrUpdate(User user);
+    User saveOrUpdate(User user);
 
-    public User registerUser(User user);
+    User registerUser(User user);
 
-    public void removeUser(Long id);
+    void removeUser(Long id);
 
-    public List<User> findAll();
+    List<User> findAll();
 
-    public User findUserById(Long id);
+    User findUserById(Long id);
 
-    public Page<User> listUserByNameLike(String name, Pageable pageable);
+    Page<User> listUserByNameLike(String name, Pageable pageable);
 
 
 }
