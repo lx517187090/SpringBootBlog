@@ -39,8 +39,18 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile("org.springframework.boot:spring-boot-devtools")
     compile("mysql:mysql-connector-java:6.0.5")
+    compile("org.apache.commons:commons-lang3:3.5")
     runtimeOnly('com.h2database:h2')
     //thymeleaf spring security 依赖
-    //compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
     compile('net.java.dev.jna:jna:4.3.0')
+    compile('org.apache.commons:commons-lang3:3.8.1')
+    compile('com.google.guava:guava:26.0-jre')
+    compile('com.google.guava:google-collect:1.0-rc1')
+    compile('com.belerweb:pinyin4j:2.5.1')
+
+
+
+
+
 }
