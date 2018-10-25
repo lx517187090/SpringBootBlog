@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="~{fragments/header :: header}">
     <style>
         .cropImg {
             position: relative;
@@ -29,9 +28,6 @@
     </style>
 </head>
 <body>
-
- 
- 
 <div id="cropImg" class="cropImg">
     <span>图片剪切</span>
     <img src="">
@@ -61,19 +57,15 @@
     var crop = document.querySelector('#cropImg');
     var cropNote = crop.querySelector('span');
     var cropImg = crop.querySelector('img');
-
     var cropper = new Cropper({
         el: '#crop',
         cp: '#cropImg',
         callback: function (dataURL, dataBlob) {
-
             cropNote.style.display = 'none';
             cropImg.style.display = 'block';
             cropImg.src = dataURL;
         }
     });
-    
-    
 </script>
     </body>
     </html>

@@ -52,14 +52,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findUserById(Long id) {
+    public User getUserById(Long id) {
         return userDao.getOne(id);
     }
 
     @Override
-    public Page<User> listUserByNameLike(String name, Pageable pageable) {
+    public Page<User> listUsersByNameLike(String name, Pageable pageable) {
         name = "%" + name + "name";
         return userDao.findByNameLike(name, pageable);
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 
     @Override
@@ -74,7 +79,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         // 加密
         String encodedPassword = passwordEncoder.encode(user.getPassword().trim());
         user.setPassword(encodedPassword);
-        return new User(user.getName(),user.getUsername(),user.getPassword(),user.getEmail(),user.getAvater(),getGrantedAuthorities(user));
+        return new User(user.getName(),user.getUsername(),user.getPassword(),user.getEmail(),user.getAvatar(),getGrantedAuthorities(user));
     }
 
     private List<Authoirty> getGrantedAuthorities(User user){

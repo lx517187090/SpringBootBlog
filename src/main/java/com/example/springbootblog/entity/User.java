@@ -3,6 +3,8 @@ package com.example.springbootblog.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -42,7 +44,7 @@ public class User implements UserDetails, Serializable {
     private String email;
 
     @Column(length = 200)
-    private String avater;
+    private String avatar;
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id",referencedColumnName ="id"),
@@ -51,12 +53,12 @@ public class User implements UserDetails, Serializable {
     //设为不参构造函数，防止直接使用
     protected User(){}
 
-    public User(String name,  String username,  String password, String email, String avater, List<Authoirty> authorities) {
+    public User(String name,  String username,  String password, String email, String avatar, List<Authoirty> authorities) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.avater = avater;
+        this.avatar = avatar;
         this.authorities = authorities;
     }
 
@@ -115,12 +117,12 @@ public class User implements UserDetails, Serializable {
         this.password = password;
     }
 
-    public String getAvater() {
-        return avater;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvater(String avater) {
-        this.avater = avater;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
 
@@ -145,6 +147,16 @@ public class User implements UserDetails, Serializable {
         return true;
     }
 
+    /**
+     * 加密密码
+     * @param password
+     */
+    public void setEncodePassword(String password){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encode = encoder.encode(password);
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -153,7 +165,7 @@ public class User implements UserDetails, Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", avater='" + avater + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }
